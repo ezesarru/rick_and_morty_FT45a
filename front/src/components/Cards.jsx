@@ -1,11 +1,16 @@
 import Card from './Card'
 
-const Cards = ({ characters }) => {
+const Cards = ({ characters, onClose }) => {
    return(
       <div>
       {
          characters.map(
-            (character) => <Card {...character} key={character.id} onClose={() => alert('Emulating the closing of a card')} />
+            (character) => 
+            <Card 
+               {...character}
+               onClose={onClose}
+               key={character.id}
+             />
          )
       }
       </div>
