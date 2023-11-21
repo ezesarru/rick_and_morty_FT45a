@@ -8,6 +8,7 @@ import About from './components/About'
 import Detail from './components/Detail'
 import Error from './components/Error'
 import Form from './components/Form'
+import Favorites from './components/Favorites'
 
 const App = () => {
 
@@ -64,8 +65,14 @@ const App = () => {
 
   return(
     <div>
-        {pathname === '/home' || pathname === '/about' || pathname.includes('/detail') ? <Nav onSearch={onSearch} logOut={logOut} /> : null }
+      { 
+        pathname === '/favorites' ||
+        pathname === '/home' ||
+        pathname === '/about' ||
+        pathname.includes('/detail') ? <Nav onSearch={onSearch} logOut={logOut} /> : null 
+      }
       <Routes>
+        <Route path='/favorites' element={<Favorites />} />
         <Route path='/' element={<Form login={login} />}/>
         <Route path='/home' element={<Cards characters={characters} onClose={onClose} />}/>
         <Route path='/about' element={<About />}/>
