@@ -34,6 +34,7 @@ const Form = ({ login }) => {
     return(
         <div>
             <form onSubmit={handleSubmit} >
+                
                 <label>Email: </label>
                 <input 
                     type="text"
@@ -42,6 +43,7 @@ const Form = ({ login }) => {
                     onChange={handleChange}
                 />
                 {errors && <p>{errors.email}</p>}
+
                 <label>Password: </label>
                 <input 
                     type="password" 
@@ -50,11 +52,13 @@ const Form = ({ login }) => {
                     onChange={handleChange} 
                 />
                 {errors && <p>{errors.password}</p>}
+                
                 <button
                     type="submit"
                     disabled={ errors.email || errors.password }
                     >Submit
                 </button>
+
             </form>
         </div>
     )

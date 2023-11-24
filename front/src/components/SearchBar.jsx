@@ -1,8 +1,8 @@
-import React from 'react'
+import { useState } from 'react'
 
 const SearchBar = ({ onSearch }) => {
 
-   const [id, setId] = React.useState('')
+   const [id, setId] = useState('')
 
    const handleChange = (event) => {
       setId(event.target.value)

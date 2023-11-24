@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { addFav, removeFav } from '../redux/actionCreator'
+import { addFav, removeFav } from '../redux/actions'
 import { useLocation } from 'react-router-dom'
 
-const Card = ({ id, name, image, onClose }) => {
+const Card = ({ id, name, image, onClose, gender }) => {
 
    const { pathname } = useLocation()
 
@@ -20,13 +20,13 @@ const Card = ({ id, name, image, onClose }) => {
          dispatch(removeFav(id))
       } else {
          setIsFav(true)
-         dispatch(addFav({ id, name, image }))
+         dispatch(addFav({ id, name, image, gender }))
       }
    }
 
    useEffect(() => {
       myFavorites.forEach((favCharacter) => {
-        if(favCharacter.id == id) {
+        if(favCharacter.id === Number(id)) {
             setIsFav(true)
         }})
     }, [myFavorites])
@@ -41,7 +41,7 @@ const Card = ({ id, name, image, onClose }) => {
          )
       }
       {
-         pathname === ('/home') && <button onClick={() => onClose(id)}>Close Card</button>
+         pathname === '/home' && <button onClick={() => onClose(id)}>Close Card</button>
       }
          <Link to={`/detail/${id}`} >
             <h2>{name}</h2>

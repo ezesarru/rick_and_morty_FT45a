@@ -1,12 +1,14 @@
 import './App.css'
+
+import axios from 'axios'
+
+import { useState, useEffect } from 'react'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+
 import Cards from './components/Cards'
 import Nav from './components/Nav'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import About from './components/About'
 import Detail from './components/Detail'
-import Error from './components/Error'
 import Form from './components/Form'
 import Favorites from './components/Favorites'
 
@@ -40,7 +42,7 @@ const App = () => {
  const onClose = (id) => {
   setCharacters(
     characters.filter(
-      (character) => character.id != id)
+      (character) => character.id !== Number(id))
     )
   }
 
@@ -48,8 +50,8 @@ const App = () => {
   const EMAIL = 'hola@gmail.com'
   const PASSWORD = '123456'
 
-  const login = (userData) => {
-    if(userData.email === EMAIL && userData.password === PASSWORD){
+  const login = ({ email, password }) => {
+    if(email === EMAIL && password === PASSWORD){
       setAccess(true)
       navigate('/home')
     }
@@ -69,16 +71,17 @@ const App = () => {
         pathname === '/favorites' ||
         pathname === '/home' ||
         pathname === '/about' ||
-        pathname.includes('/detail') ? <Nav onSearch={onSearch} logOut={logOut} /> : null 
+        pathname.includes('/detail') ? <Nav onSearch={onSearch} logOut={logOut} /> : null
       }
+
       <Routes>
-        <Route path='/favorites' element={<Favorites />} />
+        <Route path='/favorites' element={<Favorites />}/>
         <Route path='/' element={<Form login={login} />}/>
         <Route path='/home' element={<Cards characters={characters} onClose={onClose} />}/>
         <Route path='/about' element={<About />}/>
         <Route path='/detail/:id' element={<Detail />}/>
-        <Route path='*' element={<Error />}/>
       </Routes>
+
     </div>
   )
 }

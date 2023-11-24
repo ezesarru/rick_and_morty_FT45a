@@ -10,18 +10,23 @@ const Nav = ({ onSearch, logOut }) => {
     return(
         <div>
             <SearchBar onSearch={onSearch} />
+
             <button onClick={randomCard}>Random Card!</button>
+
             <Link to='/about' >
                 <button>About</button>
             </Link>
+
             <Link to='/home' >
                 <button>Home</button>
             </Link>
+
             <Link to='/favorites' >
                 <button>Favorites</button>
             </Link>
+            
             <Link to='/' >
-                <button onClick={logOut} >Log Out</button>
+                <button onClick={logOut}>Log Out</button>
             </Link>
         </div>
     )
