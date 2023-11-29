@@ -19,9 +19,9 @@ const App = () => {
   const navigate = useNavigate()
 
   const [characters, setCharacters] = useState([])
-
+    
   const onSearch = (id) => {
-    axios(`https://rym2.up.railway.app/api/character/${id}?key=pi-ezesarru`)
+    axios(`http://localhost:3001/rickandmorty/character/${id}`) //! pi-ezesarru
       .then(({ data }) => {
         if(characters.some(
           (character) => character.id === data.id)){
