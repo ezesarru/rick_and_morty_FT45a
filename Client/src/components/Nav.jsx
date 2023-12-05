@@ -1,5 +1,8 @@
-import SearchBar from "./SearchBar"
+//? Hooks
 import { Link } from 'react-router-dom'
+
+//? Imports
+import SearchBar from "./SearchBar"
 
 const Nav = ({ onSearch, logOut }) => {
 

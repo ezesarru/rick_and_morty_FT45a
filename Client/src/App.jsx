@@ -33,11 +33,13 @@ const App = () => {
           alert('¡Ya añadiste este personaje!'
         )
       }
+
       else if(data.id){
         setCharacters(
           (oldCharacters) => [...oldCharacters, data]
         )
       }
+
     } catch (error) {
       alert('No hay personajes con esa ID!')
     }
@@ -72,7 +74,7 @@ const App = () => {
  }
   
   useEffect(() => {
-    !access && navigate('/') //! no te olvides de sacar el home y poner solo '/' 
+    !access && navigate('/home') //! no te olvides de sacar el home y poner solo '/' 
   }, [access]);
 
   const logOut = () => {

@@ -1,3 +1,4 @@
+//? Imports
 import Card from './Card'
 
 const Cards = ({ characters, onClose }) => {

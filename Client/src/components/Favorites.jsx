@@ -1,4 +1,7 @@
+//? Hooks
 import { useSelector, useDispatch } from "react-redux"
+
+//? Imports
 import { filterCards, orderCards } from "../redux/actions"
 import Card from "./Card"
 
@@ -18,6 +21,7 @@ const Favorites = () => {
 
     return(
         <div>
+            
             <select onChange={handleOrder}>
                 <option>Order</option>
                 <option value="A">Ascendent</option>
