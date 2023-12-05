@@ -1,26 +1,24 @@
 const axios = require('axios')
 
-const getCharById = (res, id) => {
-    axios(`https://rym2.up.railway.app/api/character/${id}?key=pi-ezesarru`)
-    .then(({ data }) => data)
-    .then(({ id, name, gender, species, origin, image, status }) => {
-        const character = {
-            id: id,
-            name: name,
-            gender: gender,
-            species: species,
-            origin: origin,
-            image: image,
-            status: status,
+const getCharById = (req, res) => {
+    const { id } = req.params
+    
+    axios(`https://rickandmortyapi.com/api/character/${id}?key=pi-ezesarru`)
+    .then(({ data }) => {
+
+        const { id, name, gender, species, origin, image, status, location } = data
+
+        const character = { id, name, gender, species, origin, image, status, location }
+
+        if(character.id){
+            return res.status(200).json(character)
+
+        } else {
+            return res.status(404).send("Personaje no encontrado")
         }
-        return res
-        .writeHead(200, {"Content-Type": "application/json"})
-        .end(JSON.stringify(character))
     })
     .catch((error) => {
-        return res
-        .writeHead(500, {"Content-Type": "text/plain"})
-        .end(error.message)
+        return res.status(500).send(error.message)
     })
 }
 
