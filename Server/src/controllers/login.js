@@ -6,7 +6,7 @@ const login = (req, res) => {
 
     users.forEach(
         (user) => {
-            if(user.email === email && user.password === password)  {
+            if(user.email === email && user.password === password) {
                 access = true   
             }
         }

@@ -1,13 +1,11 @@
 const axios = require('axios')
 
-const getCharById = (req, res) => {
-    const { id } = req.params
-    
-    axios(`https://rickandmortyapi.com/api/character/${id}?key=pi-ezesarru`)
-    .then(({ data }) => {
+const getCharById = async (req, res) => {
+    try {    
+        const characterId = req.params.id
+        const { data } = await axios(`https://rickandmortyapi.com/api/character/${characterId}?key=pi-ezesarru`)
 
         const { id, name, gender, species, origin, image, status, location } = data
-
         const character = { id, name, gender, species, origin, image, status, location }
 
         if(character.id){
@@ -16,10 +14,10 @@ const getCharById = (req, res) => {
         } else {
             return res.status(404).send("Personaje no encontrado")
         }
-    })
-    .catch((error) => {
+    
+    } catch(error){
         return res.status(500).send(error.message)
-    })
+    }
 }
 
 module.exports = getCharById

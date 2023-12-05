@@ -24,23 +24,23 @@ const App = () => {
 
   const [characters, setCharacters] = useState([])
     
-  const onSearch = (id) => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`) //! pi-ezesarru
-      .then(({ data }) => {
-        if(characters.some(
-          (character) => character.id === data.id)){
-            alert('¡Ya añadiste este personaje!'
-          )
-        }
-        else if(data.id){
-          setCharacters(
-            (oldCharacters) => [...oldCharacters, data]
-          )
-        } else {
-          alert('¡No hay personajes con este ID!')
-        }
+  const onSearch = async (id) => {
+    try {
+      const { data } = await axios(`http://localhost:3001/rickandmorty/character/${id}`) //! pi-ezesarru
+      
+      if(characters.some(
+        (character) => character.id === data.id)){
+          alert('¡Ya añadiste este personaje!'
+        )
       }
-    )
+      else if(data.id){
+        setCharacters(
+          (oldCharacters) => [...oldCharacters, data]
+        )
+      }
+    } catch (error) {
+      alert('No hay personajes con esa ID!')
+    }
   }
 
  const onClose = (id) => {
@@ -52,23 +52,27 @@ const App = () => {
 
   const [access, setAccess] = useState(false)
 
-  const login = (userData) => {
-    const { email, password } = userData
-    const URL = 'http://localhost:3001/rickandmorty/login/'
-    axios(URL + `?email=${email}&password=${password}`)
-    .then(({ data }) => {
-       const { access } = data
-       if(access){
-         setAccess(data)
-         access && navigate('/home')
-        } else {
-          alert('Credenciales incorrectas')
-        }
-    })
+  const login = async (userData) => {
+    try {
+      const { email, password } = userData
+      const URL = 'http://localhost:3001/rickandmorty/login/'
+
+      const { data } = await axios(URL + `?email=${email}&password=${password}`)
+
+      if(data.access){
+        setAccess(data.access)
+        access && navigate('/home')
+      } else {
+        alert('Credenciales incorrectas')
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
  }
   
   useEffect(() => {
-    !access && navigate('/home') //! no te olvides de sacar el home y poner solo '/' 
+    !access && navigate('/') //! no te olvides de sacar el home y poner solo '/' 
   }, [access]);
 
   const logOut = () => {
